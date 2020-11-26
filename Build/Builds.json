@@ -1,7 +1,7 @@
 {
-"companyName": "DefaultCompany",
+"companyName": "Virsabi",
 "productName": "LPProductConfigurator",
-"productVersion": "0.1",
+"productVersion": "0.2",
 "dataUrl": "Builds.data.unityweb",
 "wasmCodeUrl": "Builds.wasm.code.unityweb",
 "wasmFrameworkUrl": "Builds.wasm.framework.unityweb",
