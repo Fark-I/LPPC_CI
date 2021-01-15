@@ -245,29 +245,29 @@ App.prototype.setupErrorHandler = function() {
             alert("Your browser ran out of memory. Try restarting your browser and close other applications running on your computer.");
             return true;
         }
-        var container = document.createElement("div");
-        container.style.position = "absolute";
-        container.style.top = "0px";
-        container.style.left = "0px";
-        container.style.bottom = "0px";
-        container.style.right = "0px";
-        container.style.backgroundColor = "#000";
-        container.style.color = "#fff";
-        container.style.fontSize = "36px";
-        var message = document.createElement("div");
-        message.innerHTML = "An <span style='color:red'>error</span> has occured, the AirConsole team was informed.";
-        message.style.position = "absolute";
-        message.style.textAlign = "center";
-        message.style.top = "40%";
-        message.style.left = "0px";
-        message.style.width = "100%";
-        container.appendChild(message);
-        document.body.appendChild(container);
-        window.setTimeout(function() {
-            if (window.app && window.app.airconsole) {
-                window.app.airconsole.navigateHome();
-            }
-        }, 5000);
+        // var container = document.createElement("div");
+        // container.style.position = "absolute";
+        // container.style.top = "0px";
+        // container.style.left = "0px";
+        // container.style.bottom = "0px";
+        // container.style.right = "0px";
+        // container.style.backgroundColor = "#000";
+        // container.style.color = "#fff";
+        // container.style.fontSize = "36px";
+        // var message = document.createElement("div");
+        // message.innerHTML = "An <span style='color:red'>error</span> has occured, the AirConsole team was informed.";
+        // message.style.position = "absolute";
+        // message.style.textAlign = "center";
+        // message.style.top = "40%";
+        // message.style.left = "0px";
+        // message.style.width = "100%";
+        // container.appendChild(message);
+        // document.body.appendChild(container);
+        // window.setTimeout(function() {
+            // if (window.app && window.app.airconsole) {
+                // window.app.airconsole.navigateHome();
+            // }
+        // }, 5000);
         return true;
     }
 };
