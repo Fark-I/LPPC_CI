@@ -1,54 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-us">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <style type=text/css>
-      #game {
-        background-image: url('TemplateData/loading-screen.png') !important;
-        background-color: black !important;
-        background-position: 50% 50% !important;
-        background-repeat: no-repeat !important;
-        background-size: 30% 25% !important;
-        position: absolute;
-        left: 50%;
-        top: 0%;
-        transform: translate(-50%, 0%);
-      }
+    <title>Product Configurator</title>
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script id= "UnityProgress" src="TemplateData/UnityProgress.js"></script>
+    <script src= "Build/UnityLoader.js"></script>
+    <script>
+        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/LPPC.json", {onProgress: UnityProgress});
 
-      html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        text-align: center;
-        font-family: sans-serif;
-      }
+    var recaptureInputAndFocus = function() {
+      var canvas = document.getElementById("#canvas");
+      if(canvas) {
+        canvas.setAttribute("tabindex", "1");
+        canvas.focus(); 
+      } else
+        setTimeout(recaptureInputAndFocus, 100);
+    }
 
-    </style>
-    <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
-    <script type="text/javascript" src="./airconsole-unity-plugin.js"></script>
-    <script type="text/javascript" src="Build/UnityLoader.js"></script>
-    <script type="text/javascript" src="translation.js"></script>
-    <script type="text/javascript">
-       function initAirConsole() {
-         var unity_web_config = {
-           width: 16,
-           height: 9
-         };
-         var progress_bar_config = {
-           left: "42.6%",
-           top: "67.8%",
-           width: "14.7%",//"14.7%",
-           height: "1.6%",//"1.6%",
-           background: "#3b3b3b", //"#3b3b3b"
-           color: "#FFFFFF"//"#ADEE00"
-         };
-         window.app = new App('game', unity_web_config, progress_bar_config);
-       }
-    </script>
-  </head>
-  <body onload="initAirConsole()">
-    <div id="game"></div>
-  </body>
+        recaptureInputAndFocus();
+</script>
+</head>
+<body>
+<div class="webgl-content">
+    <div id="gameContainer" style="width: 1280px; height: 720px"></div>
+</div>
+</body>
 </html>
