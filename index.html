@@ -1,54 +1,370 @@
-<!doctype html>
-<html lang="en-us">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <style type=text/css>
-      #game {
-        background-image: url('TemplateData/loading-screen.png') !important;
-        background-color: black !important;
-        background-position: 50% 50% !important;
-        background-repeat: no-repeat !important;
-        background-size: 30% 25% !important;
-        position: absolute;
-        left: 50%;
-        top: 0%;
-        transform: translate(-50%, 0%);
-      }
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,height=device-height, initial-scale=1.0 maximum-scale=1.0,user-scalable=no"
+    />
+    <title>LouisPoulsen configurator</title>
+    <link rel="stylesheet" href="css/tailwindstyles.css" />
 
-      html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        text-align: center;
-        font-family: sans-serif;
-      }
-
-    </style>
-    <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
-    <script type="text/javascript" src="./airconsole-unity-plugin.js"></script>
-    <script type="text/javascript" src="Build/UnityLoader.js"></script>
-    <script type="text/javascript" src="translation.js"></script>
-    <script type="text/javascript">
-       function initAirConsole() {
-         var unity_web_config = {
-           width: 16,
-           height: 9
-         };
-         var progress_bar_config = {
-           left: "42.6%",
-           top: "67.8%",
-           width: "14.7%",//"14.7%",
-           height: "1.6%",//"1.6%",
-           background: "#3b3b3b", //"#3b3b3b"
-           color: "#FFFFFF"//"#ADEE00"
-         };
-         window.app = new App('game', unity_web_config, progress_bar_config);
-       }
-    </script>
+    <link rel="stylesheet" href="build/Build_v02-5/TemplateData/style.css" /> 
+    <link rel="stylesheet" href="css/mystyles.css" />
+    <!-- "https://lppcstorage.blob.core.windows.net/template/style.css"-->
+    
   </head>
-  <body onload="initAirConsole()">
-    <div id="game"></div>
+
+  <body class="text-gray-600">
+
+    
+    <div class="md:container md:mx-auto"> <!-- container  div-->
+      
+      <div class="sm:grid sm:grid-cols-6"> <!-- Grid div-->
+        
+        <div class="ml-2 bg-gray-200 text-center mt-5"> <!-- Grid left div-->
+          <p><b> Unit Colour</b></p>
+          <p id="colorText" class="mb-2">Alumunium</p>
+          <form name="myform">
+            <input
+              type="radio"
+              id="alum"
+              name="radioColor"
+              value="Alumunium"
+              style="background-color: gray"
+              checked
+            />
+            <input
+              type="radio"
+              name="radioColor"
+              value="Brown"
+              style="background-color: rgb(207, 129, 56)"
+            />
+            <!--  <input
+              type="radio"
+              name="radioColor"
+              value="Golden"
+              style="background-color: rgb(56, 52, 48)"
+            /> -->
+          </form>
+          <!-- <p><b>Unit</b></p> -->
+
+              <p class="p-5 text-center mb-0 leading-3"><b>ADD Element/s to Unit</b></p>
+              
+            
+                <label for="elements"><b>Element </b></label>
+                <select name="Element" id="elements" class="">
+                  <option value="2">None</option>
+                  <option value="0">LightHead</option>
+                   <option value="1">Spacer</option>
+                </select>
+              
+             <!-- for add button -->  
+            <div
+              class="text-center cursor-pointer rounded-full py-1 px-1 bg-gray-300 mt-3 mb-1 ml-12 mr-12 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+              id="addElem"
+              onclick="addelem()"
+             >
+               Add Element
+            </div>
+         
+               <!-- for delete button -->  
+            <div
+              class="cursor-pointer rounded-full py-1 px-1 bg-gray-300 mt-3 mb-3 ml-12 mr-12 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+              id="delElem"
+              onclick="delelem()"
+             >
+               Del Element
+            </div>
+                <p class="defUnit mt-5" id="defunit"><b>Default Unit Element</b></p>
+
+          <!-- <div class="w-full md:w-3/5 mx-auto p-8"> -->
+          <!-- light Head default start-->
+          <div class="shadow-md" id="tabDiv">
+            <div class="tab w-full overflow-hidden border-t">
+              <input
+                class="absolute opacity-0"
+                id="tab-single"
+                type="radio"
+                name="tabs2"
+              />
+              <label
+                class="block p-5 leading-normal cursor-pointer"
+                for="tab-single"
+                >Light Head</label
+              >
+              <div
+                class="tab-content overflow-hidden border-l-2 bg-gray-200 border-gray-500 leading-3 my-5"
+              >
+                
+                <p class="p-5 text-left">Style</p>
+
+                <select
+                  name="poleStyle"
+                  id="poleStyle"
+                  onchange="myFunction1(this.id)"
+                >
+                  <option value="honeyComb1">Normal</option>
+                  <option value="honeyComb2">honeyComb</option>
+                </select>
+
+                <p class="p-5 text-left">Rotation</p>
+
+                <input
+                  type="text"
+                  class="w-10 border border-gray-600"
+                  id="rotation"
+                  name="rotation"
+                  value="70"
+                  onkeyup="rotFunction(this.id,event)"
+                />
+                <p class="p-5 text-left">Colour Temprature</p>
+                <select
+                  name="colorTemps"
+                  id="colorTemps"
+                  onchange="myFunction2(this.id)"
+                >
+                  <option value="2700">2700k</option>
+                  <option value="3000">3000k</option>
+                  <option value="4000">4000k</option>
+                </select>
+
+                <p class="p-5 text-left">Light Distribution</p>
+
+                <select
+                  name="ltdistribution"
+                  id="ltdistribution"
+                  onchange="myFunction6(this.id);"
+                >
+                  <option value="15">15</option>
+                  <option value="35">35</option>
+                </select>
+              </div>
+            </div>
+
+          </div> <!--  </tab div> -->
+         
+        </div> <!-- end of left grid-->
+       
+
+        <!-- Grid center div "webgl-content" "width: 880px; height: 720px"-->
+        <div class="bg-gray-200 ml-1 col-start-2 col-end-6 mt-5px">
+          <div class="webgl-content">
+            <div id="gameContainer" style="width: 880px; height: 675px"></div>
+          </div>
+        </div>
+        <!-- end of center div of grid-->
+
+        <!-- Grid rigt div-->
+        <div class="bg-gray-200 ml-1 text-center mt-5">
+          <p class="mb-2"><b>Globals</b></p>
+          <p class="mb-5">Lighting controls</p>
+
+          <select
+            name="ltControl"
+            id="ltControl"
+            class="text-center"
+            onchange="myFunction3()"
+          >
+            <option value="1">Dali + clo dac li</option>
+            <option value="2">Nightdim + clo dpc li</option>
+            <option value="3">Sr 2xzhaga clo hi</option>
+          </select>
+
+          <p class="mb-5 mt-5">Pole Height</p>
+
+          <select
+            name="polheight"
+            id="polheight"
+            class="text-center"
+            onchange="myFunction4()"
+          >
+            <option value="1">2.5m</option>
+            <option value="2">3.5m</option>
+            <option value="3">4.5m</option>
+          </select>
+
+          <p class="mb-5 mt-5">Mounting</p>
+
+          <select
+            name="mounting"
+            id="mounting"
+            class="text-center"
+            onchange="myFunction5()"
+          >
+            <option value="0">inground burial</option>
+            <option value="1">Base Plate</option>
+          </select>
+          <br /><br />
+          <div class="text-left ml-8">
+            <p class="mt-5 mb-5"><b>ViewPort</b></p>
+            <input
+              type="checkbox"
+              id="scaleReference"
+              name="scaleRef"
+              value="scaleRefer"
+              class="form-checkbox h-4 w-4 mt-2 mb-2"
+              onclick="toggleCheckbox(this)"
+              checked
+            />
+            <label for="scaleReference">Scale reference</label><br />
+
+            <input
+              type="checkbox"
+              id="indicativeLights"
+              name="indicativeLts"
+              value="indicativeLigt"
+              class="form-checkbox h-4 w-4 mt-2 mb-2"
+              onclick="toggleCheckbox(this)"
+              checked
+            />
+            <label for="indicativeLights">Indicative lights</label><br />
+
+            <input
+              type="checkbox"
+              id="Measurements"
+              name="measurement"
+              value="Measures"
+              class="form-checkbox h-4 w-4 mt-2 mb-2"
+              onclick="toggleCheckbox(this)"
+              checked
+            />
+            <label for="Measurements">Measurements</label><br /><br />
+          </div>
+          <br /><br />
+          <br />
+
+          <div
+            class="cursor-pointer rounded-full py-3 px-6 bg-gray-300 mb-3 ml-8 mr-8 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+            id="downloadModel"
+            onclick="download()"
+          >
+            Download Model
+          </div>
+          <div
+            class="cursor-pointer rounded-full py-3 px-6 bg-gray-300 mb-3 ml-8 mr-8 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+            id="saveLoad"
+            onclick="saveload()"
+          >
+            Save /Load
+          </div>
+          <div
+            class="cursor-pointer rounded-full py-3 px-6 bg-gray-300 mb-3 ml-8 mr-8 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+            id="getspecs"
+            onclick="specs()"
+          >
+            Get Specification
+          </div>
+        </div><!-- end of Grid rigt div-->
+
+            <!-- pop up window overlay  -->
+          <div id="myNav" class="overlay">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+              <!-- <div class="overlay-content">
+               <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Clients</a>
+                <a href="#">Contact</a> 
+              </div> end of pop up window-->
+
+          </div>   <!--End of window overlay -->
+        
+      </div> <!-- end of grid  div-->
+    </div>  <!-- end of container  div-->
+       
+       <!-- Light Head for copy invisible on page-->
+            <div class="tab w-full overflow-hidden border-t mt-1 mb-1 invisible" id="lightingHead">
+              <input
+                class="absolute opacity-0  mt-0 mb-0"
+                id="lhtab-single"
+                type="radio"
+                name="tabs2"
+              />
+              <label
+                class="block p-5 leading-normal cursor-pointer  mt-0 mb-0"
+                id="lhlblfor"
+                for="lhtab-single"
+                >Light Head</label
+              >
+              <div
+                class="tab-content overflow-hidden border-l-2 bg-gray-200 border-gray-500 leading-3 my-5"
+              >
+                
+                <p class="p-5 text-left">Style</p>
+
+                <select
+                  name="poleStyle"
+                  id="poleStylee"
+                  onchange="myFunction1(this.id)"
+                >
+                  <option value="honeyComb1">Normal</option>
+                  <option value="honeyComb2">honeyComb</option>
+                </select>
+
+                <p class="p-5 text-left">Rotation</p>
+
+                <input
+                  type="text"
+                  class="w-10 border border-gray-600"
+                  id="rotationn" 
+                  name="rotation"
+                  value="70"
+                  onkeyup="rotFunction(this.id,event)"
+                />
+                <p class="p-5 text-left">Colour Temprature</p>
+                <select
+                  name="colorTemps"
+                  id="colorTempss"
+                  onchange="myFunction2()"
+                >
+                  <option value="2700">2700k</option>
+                  <option value="3000">3000k</option>
+                  <option value="4000">4000k</option>
+                </select>
+
+                <p class="p-5 text-left">Light Distribution</p>
+
+                <select
+                  name="ltdistribution"
+                  id="ltdistributionn"
+                  onchange="myFunction6(this.id)"
+                >
+                  <option value="15">15</option>
+                  <option value="35">35</option>
+                </select>
+              </div>
+            </div>     
+
+      <!-- spacer for copy invisible on page-->
+     <div class="tab w-full  overflow-hidden border-t invisible" id="spacerElement">
+              <input
+                class="absolute opacity-0"
+                id="sptab-single"
+                type="radio"
+                name="tabs2"
+              />
+              <label
+                class="block p-5 leading-normal cursor-pointer"
+                for="sptab-single"
+                id="splblfor"
+                >Spacer</label
+              >
+              <div
+                class="tab-content overflow-hidden border-l-2 bg-gray-200 border-gray-500 leading-3 my-5"
+              >     
+              </div>
+            </div>
+        <!-- end of invisible spacer element-->
+    <!-- "https://lppcstorage.blob.core.windows.net/template/UnityProgress.js"-->
+    
+    <script
+      id="UnityProgress"
+      src="build/Build_v02-5/TemplateData/UnityProgress.js"
+    ></script> 
+    <!--"https://lppcstorage.blob.core.windows.net/$web/UnityLoader.js"-->
+    <script src="build/Build_v02-5/Build/UnityLoader.js"></script> 
+
+    <script src="scripts/script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </body>
 </html>

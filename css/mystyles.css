@@ -1,0 +1,143 @@
+/* Popup container - can be anything you want */
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
+/* for different elements in the page */
+
+ /* Tab content - closed */
+      .tab-content {
+        max-height: 0;
+        -webkit-transition: max-height 0.35s;
+        -o-transition: max-height 0.35s;
+        transition: max-height 0.35s;
+      }
+      /* :checked - resize to full height */
+      .tab input:checked ~ .tab-content {
+        max-height: 100vh;
+      }
+
+      /* Label formatting when open */
+      .tab input:checked + label {
+        @apply text-xl p-5 border-l-2 border-indigo-500 bg-gray-200 text-indigo
+        font-size: 1.25rem; /*.text-xl*/
+        padding: 1.25rem; /*.p-5*/
+        border-left-width: 2px; /*.border-l-2*/
+        border-color: #6574cd; /*.border-indigo*/
+        background-color: #f8fafc; /*.bg-gray-100 */
+        color: #6574cd; /*.text-indigo*/
+      }
+      /* Icon */
+      .tab label::after {
+        float: right;
+        right: 0;
+        top: 0;
+        display: block;
+        width: 1.5em;
+        height: 1.5em;
+        line-height: 1.5;
+        font-size: 1.25rem;
+        text-align: center;
+        -webkit-transition: all 0.35s;
+        -o-transition: all 0.35s;
+        transition: all 0.35s;
+      }
+      /* Icon formatting - closed */
+      .tab input[type="checkbox"] + label::after {
+        content: "+";
+        font-weight: bold; /*.font-bold*/
+        border-width: 1px; /*.border*/
+        border-radius: 9999px; /*.rounded-full */
+        border-color: #b8c2cc; /*.border-grey  */
+      }
+      .tab input[type="radio"] + label::after {
+        content: "\25BE";
+        font-weight: bold; /*.font-bold*/
+        border-width: 1px; /*.border*/
+        border-radius: 9999px; /*.rounded-full */
+        border-color: #b8c2cc; /*.border-grey*/
+      }
+      /* Icon formatting - open */
+      .tab input[type="checkbox"]:checked + label::after {
+        transform: rotate(315deg);
+        background-color: #6574cd; /*.bg-indigo*/
+        color: #f8fafc; /*.text-grey-lightest*/
+      }
+      .tab input[type="radio"]:checked + label::after {
+        transform: rotateX(180deg);
+        background-color: #6574cd; /*.bg-indigo*/
+        color: #f8fafc; /*.text-grey-lightest*/
+      }
+
+      /* for radio buttons on top */
+      input[type="radio"] {
+        -webkit-appearance: none;
+        width: 40px;
+        height: 40px;
+        border: 1px solid darkgray;
+        border-radius: 50%;
+        outline: none;
+        box-shadow: 0 0 5px 0px gray inset;
+      }
+      input[type="radio"]:hover {
+        box-shadow: 0 0 5px 0px orange inset;
+        cursor:pointer;
+      }
+      input[type="radio"]:before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        /*margin: 20% auto;    */
+        border-radius: 50%;
+      }
+      input[type="radio"]:checked:before {
+        /*background: green;*/
+        border: 2px solid rgb(221, 170, 170) !important;
+      }
