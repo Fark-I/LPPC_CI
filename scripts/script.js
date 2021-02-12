@@ -241,10 +241,10 @@ function saveload() {
 }
 
 function specs() {
-  window.open(
-    "https://6p935q.axshare.com/#id=hiubob&p=flint_plaza_specifications",
-    "_blank"
-  );
+    gameInstance.SendMessage(
+    "SerializationController",
+    "PostSpecifications"
+    );
 }
 
 
@@ -301,7 +301,7 @@ function addelem()
       var sArray=unitSpec.join('');
       //alert(sArray);
       gameInstance.SendMessage("UIController", "SetElements", sArray);
-      swal("Good job!", "You have added the Element", "success");
+      //swal("Good job!", "You have added the Element", "success");
     }
     else
     {
