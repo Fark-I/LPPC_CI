@@ -10,6 +10,14 @@
     <script>
         var gameInstance = UnityLoader.instantiate("gameContainer", "Build/LPPC.json", {onProgress: UnityProgress});
 
+        var lppcOnConfiguratorLoad = function(){
+            console.log("Configurator is Loaded");
+        }
+        
+        var lppcOnSpecificationClick = function(data){
+            console.log(data);
+        }
+        
     var recaptureInputAndFocus = function() {
       var canvas = document.getElementById("#canvas");
       if(canvas) {
@@ -25,6 +33,8 @@
 <body>
 <div class="webgl-content">
     <div id="gameContainer" style="width: 1280px; height: 720px"></div>
+    
+    <input type = "button" onclick = "gameInstance.SendMessage('SerializationController', 'OnLoadConfiguration', '02f66137')" value = "Load Configuration"> 
 </div>
 </body>
 </html>
