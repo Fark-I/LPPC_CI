@@ -10,12 +10,25 @@
     <script>
         var gameInstance = UnityLoader.instantiate("gameContainer", "Build/LPPC.json", {onProgress: UnityProgress});
 
+        var allowed;
+
         var lppcOnConfiguratorLoad = function(){
             console.log("Configurator is Loaded");
+            window.addEventListener('paste', function(e){
+            const str = e.clipboardData.getData('Text');
+            if(allowed){
+              gameInstance.SendMessage("LoadInputField", "PasteTextFromClipboard", str);
+            }
+            
+            });
         }
         
         var lppcOnSpecificationClick = function(data){
             console.log(data);
+        }
+
+        var lppcOnPasteAllowed = function(isAllowed){
+          allowed = isAllowed;
         }
 
         var  lppcCopyToClipboard = function(code){
