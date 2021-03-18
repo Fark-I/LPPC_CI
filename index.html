@@ -18,7 +18,7 @@
             const str = e.clipboardData.getData('Text');
             if(allowed){
               gameInstance.SendMessage("LoadInputField", "PasteTextFromClipboard", str);
-              console.log("I am sending this:............. " + str)
+              console.log("SENDING MESSAGE:..................." + str);
             }
             
             });
@@ -30,8 +30,8 @@
 
         var lppcOnPasteAllowed = function(isAllowed){
           allowed = isAllowed;
-          console.log("IS PASTE ALLOWED?........."+allowed);
-          console.log("ISALLOWED..............." + isAllowed);
+          console.log("ALLOWED?.................. " + allowed);
+          console.log("isAllowed?........................... "+ isAllowed)
         }
 
         var  lppcCopyToClipboard = function(code){
