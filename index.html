@@ -12,45 +12,63 @@
 
         var allowed;
 
-        var lppcOnConfiguratorLoad = function(){
+        var lppcOnConfiguratorLoad = function() {
             console.log("Configurator is Loaded");
             window.addEventListener('paste', function(e){
-            const str = e.clipboardData.getData('Text');
-            if(allowed){
-              gameInstance.SendMessage("LoadInputField", "PasteTextFromClipboard", str);
-              console.log("SENDING MESSAGE:..................." + str);
-            }
-            
+                const str = e.clipboardData.getData('Text');
+                if (allowed) {
+                    gameInstance.SendMessage("LoadInputField", "PasteTextFromClipboard", str);
+                    console.log("SENDING MESSAGE:..................." + str);
+                }
             });
         }
         
-        var lppcOnSpecificationClick = function(data){
+        var lppcOnSpecificationClick = function(data) {
             console.log(data);
         }
 
-        var lppcOnPasteAllowed = function(isAllowed){
+        var lppcOnPasteAllowed = function(isAllowed) {
           allowed = isAllowed;
           console.log("ALLOWED?.................. " + allowed);
           console.log("isAllowed?........................... "+ isAllowed)
         }
 
-        var  lppcCopyToClipboard = function(code){
-          var el = document.createElement('textarea');
-          el.value = code;
-          el.setAttribute('readonly', '');
-          document.body.appendChild(el);
-          el.select();
-          document.execCommand("copy");
-          document.body.removeChild(el);
+        var lppcCopyToClipboard = function(code){
+            var el = document.createElement('textarea');
+            el.value = code;
+            el.setAttribute('readonly', '');
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand("copy");
+            document.body.removeChild(el);
         }
-    var recaptureInputAndFocus = function() {
-      var canvas = document.getElementById("#canvas");
-      if(canvas) {
-        canvas.setAttribute("tabindex", "1");
-        canvas.focus(); 
-      } else
-        setTimeout(recaptureInputAndFocus, 100);
-    }
+
+        var lppcShowLoading = function(showLoading) {
+            var element = document.querySelector('#gameContainerOverlay');
+            if (element) {
+                element.parentElement.removeChild(element);
+            }
+
+            if (showLoading) {
+                var container = document.querySelector('#gameContainer');
+                var overlay = document.createElement('div');
+                overlay.id = 'gameContainerOverlay'
+                overlay.setAttribute('style', 'position:absolute; top:0; left:0; width:100%; height:100%; background-color:#000; opacity:0.4; color:#fff; display:flex; justify-content:center; align-items:center; font-family:sans-serif;')
+                overlay.innerText = "Loading...";
+
+                container.appendChild(overlay);
+            }
+        }
+
+        var recaptureInputAndFocus = function() {
+            var canvas = document.getElementById("#canvas");
+            if (canvas) {
+                canvas.setAttribute("tabindex", "1");
+                canvas.focus(); 
+            } else {
+                setTimeout(recaptureInputAndFocus, 100);
+            }
+        }
 
         recaptureInputAndFocus();
 </script>
@@ -61,3 +79,4 @@
 </div>
 </body>
 </html>
+
